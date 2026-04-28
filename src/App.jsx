@@ -257,11 +257,10 @@ function EnvelopeLetter({ letter }) {
   );
 }
 
-function Letters({ daysLeft }) {
-  const letterCount = Math.max(1, daysLeft);
-  const letters = Array.from({ length: letterCount }, (_, index) => ({
+function Letters() {
+  const letters = letterPlaceholders.map((text, index) => ({
     day: index + 1,
-    text: letterPlaceholders[index % letterPlaceholders.length]
+    text
   }));
 
   return (
@@ -269,7 +268,7 @@ function Letters({ daysLeft }) {
       <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
           <p className="font-hand text-2xl font-black text-pine">letters until the last paper</p>
-          <h2 className="mt-2 text-4xl font-black sm:text-5xl">{letterCount} little notes</h2>
+          <h2 className="mt-2 text-4xl font-black sm:text-5xl">{letters.length} little notes</h2>
         </div>
         <p className="max-w-md text-lg leading-8 text-ink/70">
           Open each letter each day. Don&apos;t try to cheat and peek🤨🙄. I can tell.
@@ -358,7 +357,7 @@ function App() {
       </section>
 
       <section className="relative z-10 px-5 py-14 sm:px-8" id="letters">
-        <Letters daysLeft={countdown.days} />
+        <Letters />
       </section>
     </main>
   );
